@@ -1,0 +1,11 @@
+pandas
+numpy
+torch
+transformers
+sentence-transformers
+nltk
+rouge-score
+sacrebleu
+bert-score
+jiwer
+scikit-learn
