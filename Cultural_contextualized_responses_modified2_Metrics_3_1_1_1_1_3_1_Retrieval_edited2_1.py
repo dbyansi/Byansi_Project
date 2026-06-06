@@ -378,7 +378,7 @@ def compute_metrics_batch_with_polysemy(
     # task_col is used only to build "references"; for meaning we use Meaning_New.
     # For context we can reuse same logic but references_map should correspond to that task.
 
-    # For your current request: we only need polysemy for meaning; context split is optional.
+    # we only need polysemy for meaning; context split is optional.
     # We'll implement for any task where references_map is keyed by processed_sentence.
 
     out = {
@@ -405,9 +405,9 @@ def compute_metrics_batch_with_polysemy(
             gold_candidates = ["" if task_col not in test_df.columns else str(test_df.iloc[i][task_col])]
 
         # Score against all gold candidates and take best
-        # Note: TER/ EditDistance/ WER are "lower is better" but your prior code minimized nothing.
-        # We'll keep consistent with your existing metric interpretation by taking MAX for all metrics.
-        # You may want to take MIN for TER/ EditDistance/ WER; but to keep behavior consistent with your current averaging,
+        # Note: TER/ EditDistance/ WER are "lower is better".
+        # We'll keep consistent with metric interpretation by taking MAX for all metrics.
+        # You may want to take MIN for TER/ EditDistance/ WER; but to keep behavior consistent with current averaging,
         # we take MAX for metrics that are similarity-like and MAX for others is not ideal.
         # For correctness, we'll treat:
         #   - similarity higher better: BLEU/ROUGE/BERTScore/chrF/RetriEVAL
@@ -434,7 +434,7 @@ def compute_metrics_batch_with_polysemy(
 
             try:
                 # bert_score expects lists; do per-pair for simplicity
-                # (costly but keeps change minimal). If you want, we can batch later.
+                # (costly but keeps change minimal). If need be, we can batch later.
                 P, R, F = bert_score.score([str(pred)], [ref], lang="en", verbose=False)
                 bert_f = F[0].item()
             except Exception:
@@ -902,18 +902,18 @@ def main():
         log.info(f"Splits : train={len(train_df)}, valid={len(valid_df)}, test={len(test_df)}")
 
         model_names = [
-            #'facebook/bart-base',
-            #'t5-base',
-            #'gpt2',
-            #'gpt2-medium',
-            #'gpt2-large',
-            #'distilgpt2',
-            #'EleutherAI/gpt-neo-125M',
-            #'Helsinki-NLP/opus-mt-mul-en',
-            #'facebook/mbart-large-50',
-            #'allenai/led-base-16384',
+            'facebook/bart-base',
+            't5-base',
+            'gpt2',
+            'gpt2-medium',
+            'gpt2-large',
+            'distilgpt2',
+            'EleutherAI/gpt-neo-125M',
+            'Helsinki-NLP/opus-mt-mul-en',
+            'facebook/mbart-large-50',
+            'allenai/led-base-16384',
             'google-t5/t5-small',
-            #'google-t5/t5-large',
+            'google-t5/t5-large',
             ]
 
 
