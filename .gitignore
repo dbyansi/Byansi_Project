@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual env
+.venv/
+
+# Outputs / results / logs / checkpoints
+results/
+*.log
+
+# Checkpoints
+best_checkpoint/
+checkpoint/
+checkpoints/
+
+# CSV outputs (optional)
+*.csv
+
+# Notebooks
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
